@@ -1,7 +1,3 @@
-# Interpreting Checkov Results and Project Insecurities 
+# How to fix those problems
 
-We can interpret the results from the vulnerabilities seen. There will be multiple vulnerabilities so maybe we need some more steps after this one to fix the vulnerabilities
-
-## Vulnerability 1
-
-## Vulnerability 2
+This is the step where we will show how to fix the vulnerabilities. This includes going to the location of the vulnerability and guiding the user to what changes need to be made (and why it is a good fix for that vulnerability)

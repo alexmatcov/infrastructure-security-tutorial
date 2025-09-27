@@ -1,12 +1,11 @@
-# Thanks for participating!
+# Reflections
 
-We can reflect on what we learned! 
+Throughout this tutorial, you have learned how to use Checkov to identify and fix various security misconfigurations in an IaC project. Integrating automated security scanning into the development workflow is a useful way to catch vulnerabilities early. Tools like Checkov make it easier to maintain secure infrastructure by providing fast security checks, which allow for quicker fixes. 
+
+It is important to recognize the limitations of automated security checks. Checkov can only recognize security issues that are written in its ruleset. Some vulnerabilities can go unnoticed if there are no specific rules to check for those. There could be potential for false positives within some scans. While Checkov is an important tool for security scanning, it should be complemented with manual reviews and more security checks. 
 
 ## Learning Outcomes
-Restate the learning outcomes
+RESTATE THE LEARNING OUTCOMES. 
 
-By the end of this tutorial, you should now be able to say you know these learning outcomes. 
+# Thanks for participating!
 
-Infrastructure security scanning is an important practice to ensure safe projects, because missed security vulnerabilities can be costly and timely. Using a tool like Checkov is a really good tool to look for these security vulnerabilities. But here are some weaknesses or things to make sure you do when you use Checkov (like it doesn't get all vulnerabilities or that you need to do your own checking too)
-
-Thanks for participating! 

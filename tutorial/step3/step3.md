@@ -1,3 +1,7 @@
-# Using Checkov
+# Interpreting Checkov Results and Project Insecurities 
 
-Here the user will install checkov and use it in their project. It will give the user results that they don't understand yet...
+We can interpret the results from the vulnerabilities seen. There will be multiple vulnerabilities so maybe we need some more steps after this one to fix the vulnerabilities
+
+## Vulnerability 1
+
+## Vulnerability 2
