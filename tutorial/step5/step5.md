@@ -9,7 +9,7 @@ In this tutorial, you will be implementing Checkov as a pre-commit hook. This en
 First, you need to install pre-commit:
 ```
 pip install pre-commit
-```
+```{{exec}}
 
 Now, create a file called `.pre-commit-config.yaml` and copy and paste the Checkov pre-commit hook code:
 ```
@@ -18,11 +18,11 @@ repos:
     rev: '3.2.471'
     hooks:
       - id: checkov
-```
+```{{copy}}
 
 Now you need to install this hook by running:
 ```
 pre-commit install
-```
+```{{exec}}
 
 Now, Checkov will successfully run with every commit!
