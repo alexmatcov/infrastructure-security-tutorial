@@ -21,6 +21,8 @@ Infrastructure and Code (IaC) allows teams to define, deploy, and manage cloud r
 
 Traditional security practices often end up fixing and monitoring post-deplotment, but this can leave potential for expensive and extensive security vulnerabilities. By integrating security checks early in the development lifecycle, even before the infrastructure is provisioned, teams can prevent these misconfigurations from being deploted. This is a "shift-left" approach to DevSecOps that emphasizes the importance of embedding security into every stage of the DevOps pipeline. 
 
+![Shift Left](..\images\shift-left.png)
+
 # What is Checkov?
 
 ![Checkov Logo](../images/checkov_blue_logo.png)
