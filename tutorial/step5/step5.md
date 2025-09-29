@@ -4,6 +4,8 @@ Integrating Checkov in the CI/CD pipeline is essential to ensure that IaC config
 
 In this tutorial, you will be implementing Checkov as a pre-commit hook. This ensures that your IaC is scanned before you commit to version control. Only scanned, secure code will be added to the repository. 
 
+![Integration with CI/CD pipeline](../../images/IV.png)
+
 ## Adding Checkov as a Pre-Commit Hook
 
 First, you need to install pre-commit:
