@@ -23,4 +23,6 @@ Traditional security practices often end up fixing and monitoring post-deplotmen
 
 # What is Checkov?
 
+![Checkov Logo](../images/checkov_blue_logo.png)
+
 [Checkov](https://www.checkov.io/) is an open source, static analysis tool designed to scan IaC templates (Terraform, Docker, Kubernetes, and more) for security and compliance issues. By automating the detection of vulnerabilities, Checkov can help to identify and remidiate problems in IaC early. 
