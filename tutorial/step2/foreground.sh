@@ -19,3 +19,5 @@ echo "restarting bash..." >> /tmp/setup2.log
 source .bashrc
 
 echo "pipx installed and checkov configured!" >> /tmp/setup2.log
+
+checkov
