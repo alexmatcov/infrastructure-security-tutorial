@@ -1,4 +1,4 @@
 #!/bin/bash
 
-apt install pipx
+apt install -y pipx
 echo pipx installed > /tmp/setup2.log
