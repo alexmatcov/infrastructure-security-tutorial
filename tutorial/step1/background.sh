@@ -13,8 +13,8 @@ python3 -m pip install --user pipx > /dev/null 2>&1
 python3 -m pipx ensurepath > /dev/null 2>&1
 
 # Add pipx to PATH for current session
-export PATH="$PATH:/root/.local/bin"
-echo 'export PATH="$PATH:/root/.local/bin"' >> /root/.bashrc
+export PATH="$PATH:/root/.local/share/pipx/venvs/checkov"
+echo 'export PATH="$PATH:/root/.local/share/pipx/venvs/checkov"' >> /root/.bashrc
 
 echo "pipx installed and configured" >> /tmp/setup.log
 
