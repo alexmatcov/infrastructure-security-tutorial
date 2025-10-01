@@ -8,15 +8,20 @@ echo "Setting up Terraform environment..." > /tmp/setup.log
 # Update package list
 apt-get update -qq > /dev/null 2>&1
 
-apt install pipx
+# Install pipx
+apt install -y pipx > /dev/null 2>&1
 
-pipx install checkov
+# Ensure pipx path is set up
+pipx ensurepath > /dev/null 2>&1
 
-# Add pipx to PATH for current session
-export PATH="$PATH:/root/.local/share/pipx/venvs/checkov"
-echo 'export PATH="$PATH:/root/.local/share/pipx/venvs/checkov"' >> /root/.bashrc
+# Install checkov via pipx
+pipx install checkov > /dev/null 2>&1
 
-echo "pipx installed and configured" >> /tmp/setup.log
+# Add pipx bin directory to PATH (where checkov executable is located)
+export PATH="$PATH:/root/.local/bin"
+echo 'export PATH="$PATH:/root/.local/bin"' >> /root/.bashrc
+
+echo "pipx and checkov installed and configured" >> /tmp/setup.log
 
 # Install Terraform if not already installed
 if ! command -v terraform &> /dev/null; then
