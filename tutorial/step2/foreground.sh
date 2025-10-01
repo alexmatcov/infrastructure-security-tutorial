@@ -1,4 +1,8 @@
 #!/bin/bash
+echo waiting for background script to finish
+while [ ! -f /tmp/setup2.log ]; do sleep 1; done
+
+echo background script done, starting foreground script
 
 echo "installing checkov..." >> /tmp/setup2.log
 pipx install checkov
