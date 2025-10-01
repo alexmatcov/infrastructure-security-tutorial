@@ -3,13 +3,13 @@
     "descripton": "Description",
     "details": {
         "intro": {
-            "text": "intro.md"
+            "text": "intro.md",
+            "background": "background.sh"
         },
         "steps": [
             {
                 "title": "Step 1",
-                "text": "step1/step1.md",
-                "background": "step1/background.sh"
+                "text": "step1/step1.md"
             },
             {
                 "title": "Step 2",
