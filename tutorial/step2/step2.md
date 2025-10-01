@@ -5,7 +5,7 @@ Now that you have learned about the Terraform architecture, let's start learning
 First we need to install Checkov. We can do that by running the following command. 
 
 ```
-pip install checkov
+pipx install checkov
 ```{{exec}}
 
 That's it! Now we can use Checkov to scan our IaC. In this case, it will scan our Terraform files.
