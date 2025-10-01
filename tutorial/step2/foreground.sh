@@ -3,7 +3,7 @@
 echo "Setting up pipx and checkov..." > /tmp/setup2.log
 
 echo "installing pipx..." >> /tmp/setup2.log
-apt install pipx
+apt install -y pipx
 
 echo "installing checkov..." >> /tmp/setup2.log
 pipx install checkov
