@@ -1,27 +1,22 @@
 #!/bin/bash
 
+# Background script to set up the Terraform environment
+# This runs automatically when the step starts
+
+echo "Setting up Terraform environment..." > /tmp/setup.log
+
 # Update package list
 apt-get update -qq > /dev/null 2>&1
 
-# Install Python and pip if not already installed
-echo "Installing Python and pip..." >> /tmp/setup.log
-apt-get install -y python3 python3-pip python3-venv > /dev/null 2>&1
+apt install pipx
 
-# Install pipx
-echo "Installing pipx..." >> /tmp/setup.log
-python3 -m pip install --user pipx > /dev/null 2>&1
-python3 -m pipx ensurepath > /dev/null 2>&1
+pipx install checkov
 
 # Add pipx to PATH for current session
 export PATH="$PATH:/root/.local/share/pipx/venvs/checkov"
 echo 'export PATH="$PATH:/root/.local/share/pipx/venvs/checkov"' >> /root/.bashrc
 
 echo "pipx installed and configured" >> /tmp/setup.log
-
-# Background script to set up the Terraform environment
-# This runs automatically when the step starts
-
-echo "Setting up Terraform environment..." > /tmp/setup.log
 
 # Install Terraform if not already installed
 if ! command -v terraform &> /dev/null; then
