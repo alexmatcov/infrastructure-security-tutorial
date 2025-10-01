@@ -11,6 +11,7 @@ pip install checkov
 That's it! Now we can use Checkov to scan our IaC. In this case, it will scan our Terraform files.
 
 ```
+cd terraform-project
 checkov -d .
 ```{{exec}}
 
