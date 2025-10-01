@@ -12,7 +12,7 @@ That's it! Now we can use Checkov to scan our IaC. In this case, it will scan ou
 
 ```
 cd terraform-project
-checkov -d .
+checkov -d . > checkov-outputs.txt
 ```{{exec}}
 
 The `-d` told Checkov to look in a specific directory. You can run Checkov in any directory, or for any file you want. A complete list of commands can be found by running

@@ -13,7 +13,8 @@
             },
             {
                 "title": "Step 2",
-                "text": "step2/step2.md"
+                "text": "step2/step2.md",
+                "foreground": "step2/foreground.sh"
             },
             {
                 "title": "Step 3",
