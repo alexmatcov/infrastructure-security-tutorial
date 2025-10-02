@@ -64,6 +64,8 @@ In the next step, we'll use Checkov to automatically identify these vulnerabilit
 &nbsp;&nbsp;&nbsp;&nbsp;↓  
 **[S3 Bucket]** ← *Public access enabled, No encryption*
 
+![Integration with CI/CD pipeline](../../images/IV2.png)
+
 ---
 
 This setup represents a common but dangerous configuration pattern that Checkov will help us identify and fix.
