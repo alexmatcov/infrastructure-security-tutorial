@@ -55,7 +55,6 @@ resource "random_id" "bucket_suffix" {
   byte_length = 8
 }
 
-# VULNERABILITY 1 & 2: S3 Bucket - Public access and no encryption
 resource "aws_s3_bucket" "data_bucket" {
   bucket = "company-data-bucket-${random_id.bucket_suffix.hex}"
 
@@ -75,8 +74,8 @@ resource "aws_s3_bucket_public_access_block" "data_bucket" {
   restrict_public_buckets = false
 }
 
-# Note: No encryption configured (VULNERABILITY 2)
-# Missing: aws_s3_bucket_server_side_encryption_configuration resource
+# VULNERABILITY 2: No encryption configured (VULNERABILITY 2)
+# Need to add aws_s3_bucket_server_side_encryption_configuration resource
 
 # VPC for RDS
 resource "aws_vpc" "main" {
@@ -122,7 +121,6 @@ resource "aws_security_group" "db_sg" {
   description = "Security group for database"
   vpc_id      = aws_vpc.main.id
 
-  # VULNERABILITY 3: SSH open to the world (0.0.0.0/0)
   ingress {
     description = "SSH from anywhere"
     from_port   = 22
@@ -141,6 +139,7 @@ resource "aws_security_group" "db_sg" {
   }
 
   egress {
+    description = "egress"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -152,7 +151,6 @@ resource "aws_security_group" "db_sg" {
   }
 }
 
-# VULNERABILITY 4 & 5: RDS Database - Publicly accessible and hardcoded password
 resource "aws_db_instance" "database" {
   identifier          = "company-database"
   engine              = "postgres"
@@ -162,7 +160,8 @@ resource "aws_db_instance" "database" {
   
   db_name  = "companydb"
   username = "admin"
-  password = "password123"  # VULNERABILITY 5: Hardcoded password
+  # VULNERABILITY 5: Hardcoded password
+  password = "password123"  
   
   # VULNERABILITY 4: Publicly accessible database
   publicly_accessible = true

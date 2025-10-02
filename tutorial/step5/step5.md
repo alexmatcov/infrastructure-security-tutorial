@@ -9,11 +9,17 @@ In this tutorial, you will be implementing Checkov as a pre-commit hook. This en
 ## Adding Checkov as a Pre-Commit Hook
 
 First, you need to install pre-commit:
+
 ```
-pip install pre-commit
+pipx install pre-commit
 ```{{exec}}
 
 Now, create a file called `.pre-commit-config.yaml` and copy and paste the Checkov pre-commit hook code:
+
+```
+touch .pre-commit-config.yaml
+```{{exec}}
+
 ```
 repos:
   - repo: https://github.com/bridgecrewio/checkov.git
@@ -22,9 +28,25 @@ repos:
       - id: checkov
 ```{{copy}}
 
-Now you need to install this hook by running:
+Let's make this a git repository to track our changes! You will need to configure your identity to do this. 
+
+```
+git init
+git config user.email "<YOUR EMAIL>"
+git config user.name "<YOUR NAME>"
+```{{copy}}
+
+Your project should be created and initialized now. You can install your newly created hook by running: 
+
 ```
 pre-commit install
 ```{{exec}}
 
-Now, Checkov will successfully run with every commit!
+Now, let's add and commit these new changes and watch as Checkov runs automatically with every commit! 
+
+```
+git add .
+git commit -m "added checkov to terraform project and fixed vulnerabilities"
+```{{exec}}
+
+You will only be allowed to commit to your repository when all checks pass, ensuring secure code is being written and commited. 
