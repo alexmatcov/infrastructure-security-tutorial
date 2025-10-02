@@ -15,9 +15,11 @@ If you keep scrolling through the document, you can see the failed checks. Let's
 
 ## CKV_AWS_53-56: S3 bucket publicly accessible ⚠ CRITICAL
 
-Search for Check CKV_AWS_53-56 in the `checkov-outputs.txt` file. The next 4 checks all refer to the public accessibility of the S3 bucket. You can see the vulnerable section of code listed for each of these checks. All of the flags are set to false, meaning that there are no blocks to the public accessibility. This is a serious security issue as you do not want your S3 bucket to be publically accessible.
+Search for Check CKV_AWS_53 to 56 in the `checkov-outputs.txt` file. The next 4 checks all refer to the public accessibility of the S3 bucket. You can see the vulnerable section of code listed for each of these checks. All of the flags are set to false, meaning that there are no blocks to the public accessibility. This is a serious security issue as you do not want your S3 bucket to be publically accessible.
 
-## CKV_AWS_19: S3 bucket not encrypted ⚠ HIGH
+## CKV_AWS_19: S3 bucket not encrypted with KMS by deafult ⚠ HIGH
+
+Look for check: CKV_AWS_145: "Ensure that S3 buckets are encrypted with KMS by default" in the `checkov-outputs.txt` file. This check wants the S3 bucket encryption to be with Key Management Service (KMS). This encryption ensures encrypted data that only authorized users can access and decrypt. We need to create a resource called "aws_s3_bucket_server_side_encryption_configuration" in order to fix this security vulneravility. 
 
 
 ## CKV_AWS_24: Security group allows SSH from 0.0.0.0/0 ⚠ HIGH
