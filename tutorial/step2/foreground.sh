@@ -16,7 +16,7 @@ echo "ensuring path" >> /tmp/setup2.log
 pipx ensurepath
 
 echo "restarting bash..." >> /tmp/setup2.log
-source .bashrc
+source /root/.bashrc
 
 echo "pipx installed and checkov configured!" >> /tmp/setup2.log
 
