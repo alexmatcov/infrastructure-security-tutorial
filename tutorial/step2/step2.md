@@ -2,12 +2,12 @@
 
 Now that you have learned about the Terraform architecture, let's start learning how to use [Checkov](checkov.io). 
 
-In the terminal, you can see there is a script running to install pipx and Checkov. This means that you will NOT need to install Checkov, but can do so if you want by running this command:
+In the terminal, you can see there is a script running to install pipx and Checkov. It will take a few seconds so please wait while everything runs. This means that you will NOT need to install Checkov, but can do so if you want by running this command:
 ```
 pipx install checkov
 ```{{copy}}
 
-Now we can use Checkov to scan our IaC. In this case, it will scan our Terraform files.
+When you see the Chekcov ASCII art, we can now use Checkov to scan our IaC. In this case, it will scan our Terraform files.
 
 ```
 cd terraform-project

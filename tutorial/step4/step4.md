@@ -27,7 +27,7 @@ We can see from the vulnerable code listed for this vulnerability, all of the pu
     }
 ```{{copy}}
 
-## CKV_AWS_19: S3 bucket not encrypted with KMS by deafult ⚠ HIGH
+## CKV_AWS_145: S3 bucket not encrypted with KMS by deafult ⚠ HIGH
 
 You can add in the missing aws_s3_bucket_server_side_encryption_configuration resource by copying the following code into the main.tf document. This encryption resource should be placed after the aws_s3_bucket_public_access_block. 
 
@@ -51,4 +51,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "data_bucket" {
 ## CKV_AWS_226: Hardcoded database password ⚠ HIGH
 
 Now, when you run Checkov again against your repository, you should have many checks fixed! Notice that not every security vulnerability is fixed from this tutorial... This is for you to continue learning about the many security vulnerabilities that Checkov scans against. This workflow is an example of the scan-fail-fix-pass cycle. 
+
+```
+checkov -d . > checkov-outputs2.txt
+```{{exec}}
 
