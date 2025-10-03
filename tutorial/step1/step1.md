@@ -33,14 +33,14 @@ Our Terraform project creates the following AWS resources:
 
 ## Viewing the Terraform Files
 
-The environment has been set up with three main Terraform files that you can explore in the editor or terminal:
-- `main.tf` - Contains all resource definitions
-- `variables.tf` - Defines input variables
-- `outputs.tf` - Defines outputs after infrastructure is created
+The environment has been set up with three main Terraform files that you can explore in the editor:
+- `main.tf` - Contains all of the resource definitions listed above
+- `variables.tf` - Defines the input variables
+- `outputs.tf` - Defines the outputs after infrastructure is created
 
 ## What Makes This Infrastructure Vulnerable?
 
-While this infrastructure might look functional, it contains multiple security misconfigurations that could expose your organization to serious risks:
+While this infrastructure might look functional, it contains multiple security misconfigurations that cause serious security risks. Here are a few of the common but serious security misconfigurations included in this project:
 
 - **Public Exposure**: Resources that should be private are accessible from the internet
 - **Missing Encryption**: Sensitive data stored without encryption
@@ -51,21 +51,6 @@ While this infrastructure might look functional, it contains multiple security m
 In the next step, we'll use Checkov to automatically identify these vulnerabilities!
 
 ## Architecture Diagram
-
-**Internet**  
-&nbsp;&nbsp;&nbsp;&nbsp;↓  
-**[Security Group]** ← *SSH/HTTP open to 0.0.0.0/0*  
-&nbsp;&nbsp;&nbsp;&nbsp;↓  
-**[EC2 Web Server]** ← *Unencrypted volume, Public IP*  
-&nbsp;&nbsp;&nbsp;&nbsp;↓  
-**[Security Group]** ← *Database port open to 0.0.0.0/0*  
-&nbsp;&nbsp;&nbsp;&nbsp;↓  
-**[RDS Database]** ← *Publicly accessible, No encryption, Hardcoded password*  
-&nbsp;&nbsp;&nbsp;&nbsp;↓  
-**[S3 Bucket]** ← *Public access enabled, No encryption*
+This setup is a common configuration pattern that contains many misconfigurations at each step. 
 
 ![Integration with CI/CD pipeline](../../images/IV2.png)
-
----
-
-This setup represents a common but dangerous configuration pattern that Checkov will help us identify and fix.

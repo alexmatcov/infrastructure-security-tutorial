@@ -1,6 +1,6 @@
 #!/bin/bash
-echo waiting for background script to finish
 while [ ! -f /tmp/setup2.log ]; do sleep 1; done
+echo waiting for background script to finish
 
 echo background script done, starting foreground script
 
