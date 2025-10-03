@@ -10,7 +10,7 @@ In the terminal, you can see there is a script running to install pipx and Check
 pipx install checkov
 ```
 
-When you see the Checkov ASCII art, the script is done, and we can start using Checkov to scan our Terraform project: 
+When you see the easter egg, the script is done, and we can start using Checkov to scan our Terraform project: 
 
 ```
 cd terraform-project
