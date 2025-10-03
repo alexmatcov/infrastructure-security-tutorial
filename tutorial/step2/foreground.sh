@@ -21,4 +21,4 @@ source /root/.bashrc
 echo "pipx installed and checkov configured!" >> /tmp/setup2.log
 
 clear
-checkov
+cat /root/pig.txt
