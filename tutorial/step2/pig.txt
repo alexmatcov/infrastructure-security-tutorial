@@ -1,9 +1,3 @@
-#!/bin/bash
-
-apt update && apt install -y pipx
-echo pipx installed > /tmp/setup2.log
-
-cat > /root/pig.txt <<'EOF'
 
               _
          <`--'\>______
@@ -12,7 +6,4 @@ cat > /root/pig.txt <<'EOF'
          `-._,        /
             )-)_/--( >  jv
            ''''  ''''
-
 The Protection Pig says you may continue now...
-
-EOF

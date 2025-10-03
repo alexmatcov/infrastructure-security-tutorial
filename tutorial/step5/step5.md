@@ -2,7 +2,7 @@
 
 Integrating Checkov in the CI/CD pipeline is essential to ensure that IaC configurations are secure from vulnerabilities before deployment. By integrating Checkov into the pipeline, it will help to catch vulnerabilities early and prevent insecure resources from reaching production. 
 
-In this tutorial, you will be implementing Checkov as a pre-commit hook. This ensures that your IaC is scanned before you commit to version control. Only scanned, secure code will be added to the repository. 
+In this tutorial, you will be implementing Checkov as a pre-commit hook. This ensures that your IaC is scanned before you commit to version control so that only scanned, secure code will be added to the repository. 
 
 ![Integration with CI/CD pipeline](../../images/IV.png)
 
@@ -14,7 +14,7 @@ First, you need to install pre-commit:
 pipx install pre-commit
 ```{{exec}}
 
-Now, create a file called `.pre-commit-config.yaml` and copy and paste the Checkov pre-commit hook code:
+Now, create a file called `.pre-commit-config.yaml` and copy and paste the Checkov pre-commit hook code listed below:
 
 ```
 touch .pre-commit-config.yaml
@@ -28,7 +28,7 @@ repos:
       - id: checkov
 ```{{copy}}
 
-Let's make this a git repository to track our changes! You will need to configure your identity to do this. 
+Let's make this a git repository to track our changes! You will need to configure your identity to do this. Replace the sections in the brackets to your own information. 
 
 ```
 git init
@@ -36,7 +36,7 @@ git config user.email "<YOUR EMAIL>"
 git config user.name "<YOUR NAME>"
 ```{{copy}}
 
-Your project should be created and initialized now. You can install your newly created hook by running: 
+Your project should now be created and initialized. You can install your newly created hook by running: 
 
 ```
 pre-commit install
@@ -49,4 +49,4 @@ git add .
 git commit -m "added checkov to terraform project and fixed vulnerabilities"
 ```{{exec}}
 
-You will only be allowed to commit to your repository when all checks pass, ensuring secure code is being written and commited. 
+By adding Checkov as a pre-commit hook, you've ensured that any code you commit to the repository will be scanned and pass Checkov's checks. You can be confident that your pushed infrastructure is more secure!

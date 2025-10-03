@@ -2,22 +2,25 @@
 
 Now that you have learned about the Terraform architecture, let's start learning how to use [Checkov](checkov.io). 
 
-In the terminal, you can see there is a script running to install pipx and Checkov. It will take a few seconds so please wait while everything runs. This means that you will NOT need to install Checkov, but can do so if you want by running this command:
-```
-pipx install checkov
-```{{copy}}
+In the terminal, you can see there is a script running to install pipx and Checkov. It will take a minute or two, so please wait while everything runs. Due to the configuration of Killer Coda, we have automated the process of installing Checkov using pipx. However, if you wanted to download it yourself, you could do so with the following command: 
 
-When you see the Chekcov ASCII art, we can now use Checkov to scan our IaC. In this case, it will scan our Terraform files.
+```
+# pipx is for Killercoda only
+# try pip on your own computer
+pipx install checkov
+```
+
+When you see the easter egg, the script is done, and we can start using Checkov to scan our Terraform project: 
 
 ```
 cd terraform-project
 checkov -d . > checkov-outputs.txt
 ```{{exec}}
 
-The `-d` told Checkov to look in a specific directory. You can run Checkov in any directory, or for any file you want. A complete list of commands can be found by running
+The `-d` tells Checkov to look in a specific directory. You can run Checkov in any directory, or on any file you want. A list of complete commands can be found by running:
 
 ```
 checkov -h
 ```{{copy}}
 
-Let's continue to the next step to interpret the Checkov outputs. 
+Let's continue to the next step to interpret the Checkov output. 

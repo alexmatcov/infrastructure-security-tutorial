@@ -17,12 +17,12 @@ Infrastructure security integration throughout the development lifecycle is an i
 
 ## Background
 
-Infrastructure and Code (IaC) allows teams to define, deploy, and manage cloud resources using code. This is an essential DevOps practice because it allows for automation, repeatability, and version control. However, this means there are more potentials for security challenges including vulnerabilities of publicly accessible storage, overly permissive network rules, and unencrypted data. 
+Infrastructure as Code (IaC) allows teams to define, deploy, and manage cloud resources using code. This is an essential DevOps practice because it allows for automation, repeatability, and version control. However, this means there are more potentials for security challenges including vulnerabilities of publicly accessible storage, overly permissive network rules, and unencrypted data. 
 
-Traditional security practices often end up fixing and monitoring post-deplotment, but this can leave potential for expensive and extensive security vulnerabilities. By integrating security checks early in the development lifecycle, even before the infrastructure is provisioned, teams can prevent these misconfigurations from being deploted. This is a "shift-left" approach to DevSecOps that emphasizes the importance of embedding security into every stage of the DevOps pipeline. 
+Traditional security practices often end up fixing and monitoring post-deployment, but this can leave potential for expensive and extensive security incidents. By integrating security checks early in the development lifecycle, even before the infrastructure is provisioned, teams can prevent these misconfigurations from being deployed. This is a "shift-left" approach to DevSecOps that emphasizes the importance of embedding security into every stage of the DevOps pipeline, focusing on stages before deployment. 
 
 # What is Checkov?
 
 ![Checkov Logo](../images/checkov_blue_logo.png)
 
-[Checkov](https://www.checkov.io/) is an open source, static analysis tool designed to scan IaC templates (Terraform, Docker, Kubernetes, and more) for security and compliance issues. By automating the detection of vulnerabilities, Checkov can help to identify and remidiate problems in IaC early. 
+[Checkov](https://www.checkov.io/) is an open source, static analysis tool designed to scan IaC templates (Terraform, Docker, Kubernetes, and more) for security and compliance issues. By automating the detection of vulnerabilities, Checkov can help to identify and remediate problems in IaC early in the development process. 
