@@ -5,10 +5,10 @@ We can interpret the results from the vulnerabilities seen. There will be multip
 If you open the file `checkov-output.txt`, you can see a very long list of issues. Let's scroll through it a little more and see what issues came up. 
 
 First, you can see the total number of checks that Checkov ran against your Terraform files. 
-`Passed checks: 17, Failed checks: 27, Skipped checks: 0`
+`Passed checks: 18, Failed checks: 26, Skipped checks: 0`
 
 Then each of the 44 checks are listed with its name, and whether it passed or failed. For example, the check:
-`Check: CKV_AWS_93: "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)"` is shown first, and it clearly passes: `PASSED for resource: aws_s3_bucket.data_bucket`. Checkov even includes where the pass occurs in the file, and a link to the documentation for this specific check. 
+`Check: CKV_AWS_93: "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)"` is shown first, and it clearly passes: `PASSED for resource: aws_s3_bucket.data_bucket`. Checkov even includes where the pass occurs in the file, and a link to the documentation for this specific check and how to fix the vulnerability. 
 
 If you keep scrolling through the document, you can see the failed checks. Let's pick a few to focus on and fix in our project. 
 
@@ -23,6 +23,7 @@ Search for Check CKV_AWS_53 to 56 in the `checkov-outputs.txt` file. The next 4 
 Look for the `aws_s3_bucket_public_access_block` resource in your `main.tf` file. Notice that all four settings (`block_public_acls`, `block_public_policy`, `ignore_public_acls`, `restrict_public_buckets`) are set to `false`. What would happen if these were all set to `true`?
 </details>
 
+
 ## CKV_AWS_145: S3 bucket not encrypted with KMS by deafult ⚠️ HIGH
 
 Look for check: CKV_AWS_145: "Ensure that S3 buckets are encrypted with KMS by default" in the `checkov-outputs.txt` file. This check wants the S3 bucket encryption to be with Key Management Service (KMS). This encryption ensures encrypted data that only authorized users can access and decrypt. We need to create a resource called "aws_s3_bucket_server_side_encryption_configuration" in order to fix this security vulneravility. 
@@ -32,6 +33,7 @@ Look for check: CKV_AWS_145: "Ensure that S3 buckets are encrypted with KMS by d
 
 Notice that there's no `aws_s3_bucket_server_side_encryption_configuration` resource in the code at all. This resource needs to be added to enable encryption. Think about where in the file this resource should be placed - it should reference the S3 bucket we created.
 </details>
+
 
 ## CKV_AWS_24: Security group allows SSH from 0.0.0.0/0 ⚠️ HIGH
 
@@ -45,6 +47,7 @@ Search for Check CKV_AWS_24 in the `checkov-outputs.txt` file. This check flags 
 Find the security group resource `aws_security_group.db_sg` and look for the ingress rule with port 22. The `cidr_blocks = ["0.0.0.0/0"]` means "from anywhere on the internet".
 </details>
 
+
 ## CKV_AWS_17: RDS database publicly accessible ⚠️ CRITICAL
 
 Look for Check CKV_AWS_17 in the `checkov-outputs.txt` file. This critical vulnerability shows that the RDS database has `publicly_accessible = true`, which gives it a public IP address that can be reached from the internet. Databases contain your most sensitive information: user accounts, passwords, financial records, and should never be directly accessible from the internet. This setting allows attackers to bypass your application security and attempt to access the database directly, making it vulnerable to SQL injection, brute force attacks, and data breaches.
@@ -54,6 +57,7 @@ Look for Check CKV_AWS_17 in the `checkov-outputs.txt` file. This critical vulne
 
 Find the `aws_db_instance` resource in `main.tf` and locate the `publicly_accessible` setting. This is a simple boolean value. What should it be set to for a production database that should only be accessed from within the VPC?
 </details>
+
 
 ## CKV_AWS_226: RDS auto minor version upgrades disabled ⚠️ HIGH
 
@@ -65,6 +69,7 @@ Find Check CKV_AWS_226 in the `checkov-outputs.txt` file. This check indicates t
 Look at the `aws_db_instance` resource. Notice there's no `auto_minor_version_upgrade` setting at all. This is a configuration that needs to be added to the resource. What value should it have to enable automatic security patches?
 </details>
 
+
 ## CKV_AWS_6: Base64 High Entropy String ⚠️ HIGH
 
 Search for Check CKV_AWS_6 in the `checkov-outputs.txt` file. This check uses entropy analysis to detect potential hardcoded secrets, passwords, or API keys in your code. High entropy strings that look like encoded credentials are flagged as security risks. In our case, this may flag the database password if it's hardcoded directly in the Terraform file. Hardcoded credentials are dangerous because they end up in version control, state files, and logs where they can be discovered by attackers. Passwords should never be stored directly in code - they should be managed through secure secret management services like AWS Secrets Manager or passed as sensitive variables.
@@ -74,6 +79,7 @@ Search for Check CKV_AWS_6 in the `checkov-outputs.txt` file. This check uses en
 
 Check the `aws_db_instance` resource for a `password` field. Is the password written directly in the code? Think about how you could use Terraform variables (defined in `variables.tf`) instead to keep sensitive information out of your code files. Look for the `variable` keyword and `sensitive = true` attribute.
 </details>
+
 
 ---
 

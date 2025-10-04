@@ -5,8 +5,6 @@ Now that you have learned about the Terraform architecture, let's start learning
 In the terminal, you can see there is a script running to install pipx and Checkov. It will take a minute or two, so please wait while everything runs. Due to the configuration of Killer Coda, we have automated the process of installing Checkov using pipx. However, if you wanted to download it yourself, you could do so with the following command: 
 
 ```
-# pipx is for Killercoda only
-# try pip on your own computer
 pipx install checkov
 ```
 
