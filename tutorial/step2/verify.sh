@@ -1,5 +1,6 @@
 #!/bin/bash
-if checkov --version >/dev/null 2>&1; then
+
+if checkov --version &> /dev/null ; then
     exit 0
 else
     exit 1
