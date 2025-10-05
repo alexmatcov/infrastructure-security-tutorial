@@ -332,6 +332,23 @@ resource "aws_vpc" "main" {
 # KMS encryption and retention
 resource "aws_kms_key" "cloudwatch" {
   description             = "KMS key for CloudWatch logs"
+  policy      = <<POLICY
+  {
+    "Version": "2012-10-17",
+    "Id": "default",
+    "Statement": [
+      {
+        "Sid": "DefaultAllow",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::123456789012:root"
+        },
+        "Action": "kms:*",
+        "Resource": "*"
+      }
+    ]
+  }
+POLICY
   deletion_window_in_days = 10
   enable_key_rotation     = true
 }
