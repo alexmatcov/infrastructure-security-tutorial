@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if command -v checkov >/dev/null 2>&1 && checkov -v >/dev/null 2>&1; then
+if command -v checkov &> /dev/null; then
     exit 0
 else
     exit 1
