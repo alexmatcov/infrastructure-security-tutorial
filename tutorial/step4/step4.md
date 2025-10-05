@@ -2,7 +2,7 @@
 
 This is the step where we will show how to fix the vulnerabilities. This includes going to the location of the vulnerability and guiding the user to what changes need to be made (and why it is a good fix for that vulnerability)
 
-## CKV_AWS_53-56: S3 bucket publicly accessible ⚠️ CRITICAL
+## Fix 1: S3 bucket publicly accessible (CKV_AWS_53-56) ⚠️ CRITICAL
 ```
     resource "aws_s3_bucket_public_access_block" "data_bucket" {
     bucket = aws_s3_bucket.data_bucket.id
@@ -27,7 +27,7 @@ We can see from the vulnerable code listed for this vulnerability, all of the pu
     }
 ```
 
-## CKV_AWS_145: S3 bucket not encrypted with KMS by deafult ⚠️ HIGH
+## Fix 2: S3 bucket not encrypted with KMS by deafult (CKV_AWS_145) ⚠️ HIGH
 
 You can add in the missing aws_s3_bucket_server_side_encryption_configuration resource by copying the following code into the main.tf document. This encryption resource should be placed after the aws_s3_bucket_public_access_block. 
 
@@ -44,7 +44,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "data_bucket" {
 }
 ```{{copy}}
 
-## CKV_AWS_24: Security group allows SSH from 0.0.0.0/0 ⚠️ HIGH
+## Fix  3: Security group allows SSH from 0.0.0.0/0 (CKV_AWS_24) ⚠️ HIGH
+
 For this tutorial, we don't actually need SSH access at all, so the best fix is to remove this entire ingress block. Delete these lines from the security group. This eliminates the attack surface completely. If you did need SSH access in a real scenario, you would replace 0.0.0.0/0 with your specific IP range.
 
 In the `main.tf` file, find the security group resource `aws_security_group.db_sg`. You'll see an ingress rule that allows SSH from anywhere:
@@ -59,7 +60,7 @@ ingress {
 }
 ```
 
-## CKV_AWS_17: RDS database publicly accessible ⚠️ CRITICAL
+## Fix 4: RDS database publicly accessible (CKV_AWS_17) ⚠️ CRITICAL
 
 In the main.tf file, locate the aws_db_instance resource named "database". Find the line that says publicly_accessible = true. This setting gives the database a public IP address. Change it to false: 
 
@@ -69,18 +70,7 @@ publicly_accessible = false
 
 This ensures the database can only be accessed from within the VPC, not from the internet. This is how databases should always be configured - accessible only to your application servers, not to the outside world.
 
-
-## CKV_AWS_226: RDS auto minor version upgrades disabled ⚠️ HIGH
-
-In the same `aws_db_instance` resource, we need to add a setting to enable automatic minor version upgrades. Add this line to the database configuration:
-
-```
-auto_minor_version_upgrade = true
-```{{copy}}
-
-This tells AWS to automatically apply minor version updates (like PostgreSQL 14.7 to 14.8) that include security patches and bug fixes. These updates happen during your maintenance window and don't break compatibility. Major version upgrades (like PostgreSQL 14 to 15) still require manual approval.
-
-## CKV_AWS_6: Base64 High Entropy String ⚠️ HIGH
+## Fix 5: Base64 High Entropy String (CKV_AWS_6) ⚠️ HIGH
 
 This check detects potential hardcoded secrets in your code. If you have a hardcoded password like `password = "password123"` in your `aws_db_instance` resource, you need to replace it with a variable.
 
@@ -100,6 +90,16 @@ password = var.db_password
 ```
 
 The `sensitive = true` flag prevents the password from being displayed in logs or console output. In production, you would provide this password through environment variables (`TF_VAR_db_password`) or use AWS Secrets Manager to retrieve it dynamically. Never commit passwords to version control.
+
+## Fix 6: RDS auto minor version upgrades disabled (CKV_AWS_226) ⚠️ HIGH
+
+In the same `aws_db_instance` resource, we need to add a setting to enable automatic minor version upgrades. Add this line to the database configuration:
+
+```
+auto_minor_version_upgrade = true
+```{{copy}}
+
+This tells AWS to automatically apply minor version updates (like PostgreSQL 14.7 to 14.8) that include security patches and bug fixes. These updates happen during your maintenance window and don't break compatibility. Major version upgrades (like PostgreSQL 14 to 15) still require manual approval.
 
 ## Checking Fixes
 

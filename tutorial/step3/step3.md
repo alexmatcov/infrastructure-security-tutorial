@@ -12,8 +12,9 @@ Then each of the 44 checks are listed with its name, and whether it passed or fa
 
 If you keep scrolling through the document, you can see the failed checks. Let's pick a few to focus on and fix in our project. 
 
+**Tip:** For easier navigation through the 
 
-## CKV_AWS_53-56: S3 bucket publicly accessible ⚠️ CRITICAL
+## Vulnerability 1: S3 bucket publicly accessible (CKV_AWS_53-56) ⚠️ CRITICAL
 
 Search for Check CKV_AWS_53 to 56 in the `checkov-outputs.txt` file. The next 4 checks all refer to the public accessibility of the S3 bucket. You can see the vulnerable section of code listed for each of these checks. All of the flags are set to false, meaning that there are no blocks to the public accessibility. This is a serious security issue as you do not want your S3 bucket to be publically accessible.
 
@@ -24,7 +25,7 @@ Look for the `aws_s3_bucket_public_access_block` resource in your `main.tf` file
 </details>
 
 
-## CKV_AWS_145: S3 bucket not encrypted with KMS by deafult ⚠️ HIGH
+## Vulnerability 2: S3 bucket not encrypted with KMS by deafult (CKV_AWS_145) ⚠️ HIGH
 
 Look for check: CKV_AWS_145: "Ensure that S3 buckets are encrypted with KMS by default" in the `checkov-outputs.txt` file. This check wants the S3 bucket encryption to be with Key Management Service (KMS). This encryption ensures encrypted data that only authorized users can access and decrypt. We need to create a resource called "aws_s3_bucket_server_side_encryption_configuration" in order to fix this security vulneravility. 
 
@@ -35,9 +36,7 @@ Notice that there's no `aws_s3_bucket_server_side_encryption_configuration` reso
 </details>
 
 
-## CKV_AWS_24: Security group allows SSH from 0.0.0.0/0 ⚠️ HIGH
-
-<!-- CKV_AWS_24, CKV_AWS_382: egress -->
+## Vulnerability 3: Security group allows SSH from 0.0.0.0/0 (CKV_AWS_24) ⚠️ HIGH
 
 Search for Check CKV_AWS_24 in the `checkov-outputs.txt` file. This check flags that SSH access (port 22) is open to the entire internet with the CIDR block `0.0.0.0/0`. This means anyone from anywhere can attempt to connect to your server via SSH. This is a significant security risk as it exposes your infrastructure to brute force attacks, where automated bots continuously try different password combinations. SSH should only be accessible from trusted IP addresses, such as your corporate network or VPN, not from the entire internet.
 
@@ -48,7 +47,7 @@ Find the security group resource `aws_security_group.db_sg` and look for the ing
 </details>
 
 
-## CKV_AWS_17: RDS database publicly accessible ⚠️ CRITICAL
+## Vulnerability 4: RDS database publicly accessible (CKV_AWS_17) ⚠️ CRITICAL
 
 Look for Check CKV_AWS_17 in the `checkov-outputs.txt` file. This critical vulnerability shows that the RDS database has `publicly_accessible = true`, which gives it a public IP address that can be reached from the internet. Databases contain your most sensitive information: user accounts, passwords, financial records, and should never be directly accessible from the internet. This setting allows attackers to bypass your application security and attempt to access the database directly, making it vulnerable to SQL injection, brute force attacks, and data breaches.
 
@@ -59,18 +58,7 @@ Find the `aws_db_instance` resource in `main.tf` and locate the `publicly_access
 </details>
 
 
-## CKV_AWS_226: RDS auto minor version upgrades disabled ⚠️ HIGH
-
-Find Check CKV_AWS_226 in the `checkov-outputs.txt` file. This check indicates that automatic minor version upgrades are not enabled for the RDS database. Minor version upgrades include critical security patches and bug fixes. Without this setting enabled, your database remains vulnerable to known security issues that have already been patched by AWS. You would need to manually track and apply these updates, which increases the risk of missing important security patches.
-
-<details>
-<summary><strong>💡 Hint </strong></summary>
-
-Look at the `aws_db_instance` resource. Notice there's no `auto_minor_version_upgrade` setting at all. This is a configuration that needs to be added to the resource. What value should it have to enable automatic security patches?
-</details>
-
-
-## CKV_AWS_6: Base64 High Entropy String ⚠️ HIGH
+## Vulnerability 5: Base64 High Entropy String (CKV_AWS_6) ⚠️ HIGH
 
 Search for Check CKV_AWS_6 in the `checkov-outputs.txt` file. This check uses entropy analysis to detect potential hardcoded secrets, passwords, or API keys in your code. High entropy strings that look like encoded credentials are flagged as security risks. In our case, this may flag the database password if it's hardcoded directly in the Terraform file. Hardcoded credentials are dangerous because they end up in version control, state files, and logs where they can be discovered by attackers. Passwords should never be stored directly in code - they should be managed through secure secret management services like AWS Secrets Manager or passed as sensitive variables.
 
@@ -80,6 +68,16 @@ Search for Check CKV_AWS_6 in the `checkov-outputs.txt` file. This check uses en
 Check the `aws_db_instance` resource for a `password` field. Is the password written directly in the code? Think about how you could use Terraform variables (defined in `variables.tf`) instead to keep sensitive information out of your code files. Look for the `variable` keyword and `sensitive = true` attribute.
 </details>
 
+
+## Vulnerability 6: RDS auto minor version upgrades disabled (CKV_AWS_226) ⚠️ HIGH
+
+Find Check CKV_AWS_226 in the `checkov-outputs.txt` file. This check indicates that automatic minor version upgrades are not enabled for the RDS database. Minor version upgrades include critical security patches and bug fixes. Without this setting enabled, your database remains vulnerable to known security issues that have already been patched by AWS. You would need to manually track and apply these updates, which increases the risk of missing important security patches.
+
+<details>
+<summary><strong>💡 Hint </strong></summary>
+
+Look at the `aws_db_instance` resource. Notice there's no `auto_minor_version_upgrade` setting at all. This is a configuration that needs to be added to the resource. What value should it have to enable automatic security patches?
+</details>
 
 ---
 
