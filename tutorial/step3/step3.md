@@ -12,8 +12,6 @@ Then each of the 96 checks are listed with its name, and whether it passed or fa
 
 If you keep scrolling through the document, you can see the failed checks. Let's pick a few to focus on and fix in our project. 
 
-**Tip:** The code includes comments marking each vulnerability with the text "VULNERABILITY". You can use your IDE's search function (Ctrl+F or Cmd+F) to quickly find these in the `main.tf` file and fix them.
-
 ## Vulnerability 1: S3 bucket publicly accessible (CKV_AWS_53-56) ⚠️ CRITICAL
 
 Search for Check CKV_AWS_53 to 56 in the `checkov-outputs.txt` file. The next 4 checks all refer to the public accessibility of the S3 bucket. You can see the vulnerable section of code listed for each of these checks. All of the flags are set to false, meaning that there are no blocks to the public accessibility. This is a serious security issue as you do not want your S3 bucket to be publically accessible.
@@ -91,4 +89,4 @@ These are common real-world security mistakes that Checkov caught automatically!
 
 **Challenge:** Before moving to the next step, try fixing the vulnerabilities yourself and use the hints above if you need extra guidance.
 
-When you're ready (or if you need more guidance), proceed to the next step where we'll walk through fixing each vulnerability with detailed explanations.
+When you're ready (or if you need more guidance), proceed to the next step where we'll walk through together fixing each vulnerability with detailed explanations.

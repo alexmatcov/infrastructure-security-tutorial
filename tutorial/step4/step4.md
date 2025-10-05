@@ -2,6 +2,8 @@
 
 This is the step where we will show how to fix the vulnerabilities. This includes going to the location of the vulnerability and guiding the user to what changes need to be made (and why it is a good fix for that vulnerability)
 
+**Tip:** The code includes comments marking each vulnerability with the text "VULNERABILITY". You can use your IDE's search function (Ctrl+F or Cmd+F) to quickly find these in the `main.tf` file and fix them.
+
 ## Fix 1: S3 bucket publicly accessible (CKV_AWS_53-56) ⚠️ CRITICAL
 ```
     resource "aws_s3_bucket_public_access_block" "data_bucket" {
