@@ -20,6 +20,8 @@ Now, create a file called `.pre-commit-config.yaml` and copy and paste the Check
 touch .pre-commit-config.yaml
 ```{{exec}}
 
+Open `.pre-commit-config.yaml` in your favourite terminal text editor, i.e., vim or nano, and add the following:
+
 ```
 repos:
   - repo: https://github.com/bridgecrewio/checkov.git
