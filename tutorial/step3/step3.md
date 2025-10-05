@@ -12,7 +12,7 @@ Then each of the 96 checks are listed with its name, and whether it passed or fa
 
 If you keep scrolling through the document, you can see the failed checks. Let's pick a few to focus on and fix in our project. 
 
-## Vulnerability 1: S3 bucket publicly accessible (CKV_AWS_53-56) ⚠️ CRITICAL
+## Vulnerability 1: S3 bucket publicly accessible (CKV_AWS_53-56)
 
 Search for Check CKV_AWS_53 to 56 in the `checkov-outputs.txt` file. The next 4 checks all refer to the public accessibility of the S3 bucket. You can see the vulnerable section of code listed for each of these checks. All of the flags are set to false, meaning that there are no blocks to the public accessibility. This is a serious security issue as you do not want your S3 bucket to be publically accessible.
 
@@ -23,7 +23,7 @@ Look for the `aws_s3_bucket_public_access_block` resource in your `main.tf` file
 </details>
 
 
-## Vulnerability 2: S3 bucket not encrypted with KMS by deafult (CKV_AWS_145) ⚠️ HIGH
+## Vulnerability 2: S3 bucket not encrypted with KMS by deafult (CKV_AWS_145)
 
 Look for check: CKV_AWS_145: "Ensure that S3 buckets are encrypted with KMS by default" in the `checkov-outputs.txt` file. This check wants the S3 bucket encryption to be with Key Management Service (KMS). This encryption ensures encrypted data that only authorized users can access and decrypt. We need to create a resource called "aws_s3_bucket_server_side_encryption_configuration" in order to fix this security vulneravility. 
 
@@ -34,7 +34,7 @@ Notice that there's no `aws_s3_bucket_server_side_encryption_configuration` reso
 </details>
 
 
-## Vulnerability 3: Security group allows SSH from 0.0.0.0/0 (CKV_AWS_24) ⚠️ HIGH
+## Vulnerability 3: Security group allows SSH from 0.0.0.0/0 (CKV_AWS_24)
 
 Search for Check CKV_AWS_24 in the `checkov-outputs.txt` file. This check flags that SSH access (port 22) is open to the entire internet with the CIDR block `0.0.0.0/0`. This means anyone from anywhere can attempt to connect to your server via SSH. This is a significant security risk as it exposes your infrastructure to brute force attacks, where automated bots continuously try different password combinations. SSH should only be accessible from trusted IP addresses, such as your corporate network or VPN, not from the entire internet.
 
@@ -45,7 +45,7 @@ Find the security group resource `aws_security_group.db_sg` and look for the ing
 </details>
 
 
-## Vulnerability 4: RDS database publicly accessible (CKV_AWS_17) ⚠️ CRITICAL
+## Vulnerability 4: RDS database publicly accessible (CKV_AWS_17)
 
 Look for Check CKV_AWS_17 in the `checkov-outputs.txt` file. This critical vulnerability shows that the RDS database has `publicly_accessible = true`, which gives it a public IP address that can be reached from the internet. Databases contain your most sensitive information: user accounts, passwords, financial records, and should never be directly accessible from the internet. This setting allows attackers to bypass your application security and attempt to access the database directly, making it vulnerable to SQL injection, brute force attacks, and data breaches.
 
@@ -56,7 +56,7 @@ Find the `aws_db_instance` resource in `main.tf` and locate the `publicly_access
 </details>
 
 
-## Vulnerability 5: Base64 High Entropy String (CKV_AWS_6) ⚠️ HIGH
+## Vulnerability 5: Base64 High Entropy String (CKV_AWS_6)
 
 Search for Check CKV_AWS_6 in the `checkov-outputs.txt` file. This check uses entropy analysis to detect potential hardcoded secrets, passwords, or API keys in your code. High entropy strings that look like encoded credentials are flagged as security risks. In our case, this may flag the database password if it's hardcoded directly in the Terraform file. Hardcoded credentials are dangerous because they end up in version control, state files, and logs where they can be discovered by attackers. Passwords should never be stored directly in code - they should be managed through secure secret management services like AWS Secrets Manager or passed as sensitive variables.
 
@@ -67,7 +67,7 @@ Check the `aws_db_instance` resource for a `password` field. Is the password wri
 </details>
 
 
-## Vulnerability 6: RDS auto minor version upgrades disabled (CKV_AWS_226) ⚠️ HIGH
+## Vulnerability 6: RDS auto minor version upgrades disabled (CKV_AWS_226)
 
 Find Check CKV_AWS_226 in the `checkov-outputs.txt` file. This check indicates that automatic minor version upgrades are not enabled for the RDS database. Minor version upgrades include critical security patches and bug fixes. Without this setting enabled, your database remains vulnerable to known security issues that have already been patched by AWS. You would need to manually track and apply these updates, which increases the risk of missing important security patches.
 
@@ -81,9 +81,7 @@ Look at the `aws_db_instance` resource. Notice there's no `auto_minor_version_up
 
 ## Summary and Next Steps
 
-We've identified **6 major vulnerabilities** in our infrastructure:
-- **2 CRITICAL** - S3 bucket and database exposed to the internet
-- **4 HIGH/MEDIUM** - Missing encryption, weak access controls, and hardcoded secrets
+We've identified **6 major vulnerabilities** in our infrastructure related to S3 bucket and database exposed to the internet, missing encryption, weak access controls, and hardcoded secrets.
 
 These are common real-world security mistakes that Checkov caught automatically!
 
