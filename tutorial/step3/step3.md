@@ -5,7 +5,7 @@ Now that Checkov has scanned your infrastructure, let's examine the results to u
 If you open the file `terraform-project/checkov-output.txt`, you can see a very long list of checks. Let's scroll through it a little more and see what issues came up. 
 
 First, you can see the total number of checks that Checkov ran against your Terraform files. 
-`Passed checks: 86, Failed checks: 10, Skipped checks: 0`
+`Passed checks: 87, Failed checks: 9, Skipped checks: 0`
 
 Then each of the 96 checks are listed with its name, and whether it passed or failed. For example, the check:
 `Check: CKV_AWS_93: "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)"` is shown first, and it clearly passes: `PASSED for resource: aws_s3_bucket.data_bucket`. Checkov even includes where the pass occurs in the file, and a link to the documentation for this specific check and how to fix the vulnerability. 
