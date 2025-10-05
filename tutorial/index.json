@@ -12,9 +12,9 @@
             },
             {
                 "text": "step2/step2.md",
-                "background": "step2/background.sh",
+                "verify": "step2/verify.sh",
                 "foreground": "step2/foreground.sh",
-                "verify": "step2/verify.sh"
+                "background": "step2/background.sh"
             },
             {
                 "text": "step3/step3.md"
