@@ -1,18 +1,18 @@
 # Interpreting Checkov Results and Project Insecurities 
 
-We can interpret the results from the vulnerabilities seen. There will be multiple vulnerabilities so maybe we need some more steps after this one to fix the vulnerabilities
+Now that Checkov has scanned your infrastructure, let's examine the results to understand what security issues were found. In this step, you'll learn how to read Checkov's output, identify the most critical vulnerabilities, and understand why they matter. We'll focus on 6 key security issues that you'll fix in the next step.
 
-If you open the file `checkov-output.txt`, you can see a very long list of issues. Let's scroll through it a little more and see what issues came up. 
+If you open the file `terraform-project/checkov-output.txt`, you can see a very long list of checks. Let's scroll through it a little more and see what issues came up. 
 
 First, you can see the total number of checks that Checkov ran against your Terraform files. 
-`Passed checks: 18, Failed checks: 26, Skipped checks: 0`
+`Passed checks: 86, Failed checks: 10, Skipped checks: 0`
 
-Then each of the 44 checks are listed with its name, and whether it passed or failed. For example, the check:
+Then each of the 96 checks are listed with its name, and whether it passed or failed. For example, the check:
 `Check: CKV_AWS_93: "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)"` is shown first, and it clearly passes: `PASSED for resource: aws_s3_bucket.data_bucket`. Checkov even includes where the pass occurs in the file, and a link to the documentation for this specific check and how to fix the vulnerability. 
 
 If you keep scrolling through the document, you can see the failed checks. Let's pick a few to focus on and fix in our project. 
 
-**Tip:** For easier navigation through the 
+**Tip:** The code includes comments marking each vulnerability with the text "VULNERABILITY". You can use your IDE's search function (Ctrl+F or Cmd+F) to quickly find these in the `main.tf` file and fix them.
 
 ## Vulnerability 1: S3 bucket publicly accessible (CKV_AWS_53-56) ⚠️ CRITICAL
 
