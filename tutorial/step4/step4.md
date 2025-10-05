@@ -50,7 +50,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "data_bucket" {
 
 For this tutorial, we don't actually need SSH access at all, so the best fix is to remove this entire ingress block. Delete these lines from the security group. This eliminates the attack surface completely. If you did need SSH access in a real scenario, you would replace 0.0.0.0/0 with your specific IP range.
 
-In the `main.tf` file, find the security group resource `aws_security_group.db_sg`. You'll see an ingress rule that allows SSH from anywhere:
+In the `main.tf` file, find the security group resource `aws_security_group.db_sg`. You'll see an ingress rule that allows SSH from anywhere. Delete the entire `ingress` block or edit the `cidr_blocks` to contain your specific IP range, i.e. `130.229.133.0/18`.
 
 ```
 ingress {
@@ -58,7 +58,7 @@ ingress {
   from_port   = 22
   to_port     = 22
   protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["130.229.133.0/18"]
 }
 ```
 
@@ -89,13 +89,13 @@ variable "db_password" {
 Then in `main.tf`, replace the hardcoded password with the variable:
 ```hcl
 password = var.db_password 
-```
+```{{copy}}
 
 The `sensitive = true` flag prevents the password from being displayed in logs or console output. In production, you would provide this password through environment variables (`TF_VAR_db_password`) or use AWS Secrets Manager to retrieve it dynamically. Never commit passwords to version control.
 
-## Fix 6: RDS auto minor version upgrades disabled (CKV_AWS_226) ⚠️ HIGH
+## Fix 6: RDS auto minor version upgrades disabled (CKV_AWS_226) HIGH
 
-In the same `aws_db_instance` resource, we need to add a setting to enable automatic minor version upgrades. Add this line to the database configuration:
+In the same `aws_db_instance` resource, we need to change a setting to enable automatic minor version upgrades. Find `auto_minor_version_upgrade` and set it to true.
 
 ```
 auto_minor_version_upgrade = true
