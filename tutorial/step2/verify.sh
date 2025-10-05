@@ -1,7 +1,8 @@
 #!/bin/bash
 
-if checkov --version &> /dev/null ; then
+# Direct file check
+if [ -f "/root/.local/bin/checkov" ]; then
     exit 0
-else
-    exit 1
 fi
+
+exit 1
