@@ -8,7 +8,7 @@ First, you can see the total number of checks that Checkov ran against your Terr
 `Passed checks: 87, Failed checks: 9, Skipped checks: 0`
 
 Then each of the 96 checks are listed with its name, and whether it passed or failed. For example, the check:
-`Check: CKV_AWS_93: "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)"` is shown first, and it clearly passes: `PASSED for resource: aws_s3_bucket.data_bucket`. Checkov even includes where the pass occurs in the file, and a link to the documentation for this specific check and how to fix the vulnerability. 
+`Check: CKV_AWS_41: "Ensure no hard coded AWS access key and secret key exists in provider"` is shown first, and it clearly passes: `PASSED for resource: aws.default`. Checkov even includes where the pass occurs in the file, and a link to the documentation for this specific check and how to fix the vulnerability. 
 
 If you keep scrolling through the document, you can see the failed checks. Let's pick a few to focus on and fix in our project. 
 

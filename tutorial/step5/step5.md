@@ -52,3 +52,6 @@ git commit -m "added checkov to terraform project and fixed vulnerabilities"
 ```{{exec}}
 
 By adding Checkov as a pre-commit hook, you've ensured that any code you commit to the repository will be scanned and pass Checkov's checks. You can be confident that your pushed infrastructure is more secure!
+
+Congratulations! You should have passed all Checkov checks and see this result from the pre-commit: 
+`Checkov..............Passed`
